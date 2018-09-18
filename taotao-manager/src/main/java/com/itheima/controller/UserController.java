@@ -9,7 +9,6 @@ package com.itheima.controller;
  *  @描述：    TODO
  */
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.itheima.pojo.User;
 import com.itheima.service.UserService;
@@ -20,14 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 //@Controller
 public class UserController {
 
-    //多家一行注释
+    //多家一行注释  热部署
 
     //这个注解的意思是 ： 自动注入，在当前这个项目的Spring容器里面寻找UserService这个接口的实现类对象。
     //找到之后，给这个userService 赋值进来。 UserService的实现类是UserServiceImpl
     //@Autowired
 
 
-    @Reference
+   // @Reference
     private UserService userService ;
 
 
