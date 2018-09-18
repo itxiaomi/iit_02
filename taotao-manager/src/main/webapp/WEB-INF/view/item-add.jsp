@@ -8,6 +8,7 @@
 	        <tr>
 	            <td>商品类目:</td>
 	            <td>
+					<%--链接按钮 - linkbutton  selectItemCat : 点击之后执行这个函数--%>
 	            	<a href="javascript:void(0)" class="easyui-linkbutton selectItemCat">选择类目</a>
 	            	<span ></span>
 	            	<input type="hidden" name="cid" style="width: 280px;"></input>
@@ -74,6 +75,8 @@
 	};
 	
 	var itemAddEditor ;
+
+	//这是JQuery的入口函数， 页面加载完毕之后，就会执行这里面的方法
 	$(function(){
 		//创建富文本编辑器
 		itemAddEditor = KindEditor.create("#itemAddForm [name=desc]", kingEditorParams);
@@ -114,20 +117,27 @@
 	
 	//类目选择初始化
 	function initItemCat(){
+	    //根据class名称，找到刚才的那个 选择类目 的 标签， 然后绑定点击事件
 		var selectItemCat = $(".selectItemCat");
    		selectItemCat.click(function(){
+
+   		    //生成div， 然后在div里面生成ul  <div><ul></ul></div>
    			$("<div>").css({padding:"5px"}).html("<ul>")
+
+				//生成窗口
    			.window({
    				width:'500',
    			    height:"450",
-   			    modal:true,
+   			    modal:true,  //背景模糊
    			    closed:true,
-   			    iconCls:'icon-save',
+   			    iconCls:'icon-save', //有一个保存的图标
    			    title:'选择类目',
-   			    onOpen : function(){
+   			    onOpen : function(){ //打开这个窗口触发的方法
    			    	var _win = this;
+
+   			    	//在上面生成的ul里面添加树状内容
    			    	$("ul",_win).tree({
-   			    		url:'/rest/item/cat',
+   			    		url:'/rest/item/cat',  //请求路径地址 树的内容来自于哪里。
    			    		method:'GET',
    			    		animate:true,
    			    		onClick : function(node){
@@ -140,10 +150,12 @@
    			    		}
    			    	});
    			    },
+
+				//关闭窗口触发的方法
    			    onClose : function(){
    			    	$(this).window("destroy");
    			    }
-   			}).window('open');
+   			}).window('open'); //打开窗口
    		});
     }
 	
