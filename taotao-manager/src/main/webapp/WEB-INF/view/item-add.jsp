@@ -160,6 +160,7 @@
     }
 	
 	//图片上传初始化
+	//页面一加载完毕就调用这个方法
 	function initPicUpload(){
        	$(".picFileUpload").click(function(){
        		var form = $('#itemAddForm');
