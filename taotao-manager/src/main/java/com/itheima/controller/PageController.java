@@ -58,6 +58,16 @@ public class PageController {
         return pageName;
     }
 
+
+
+    @RequestMapping("/")
+    public String index(){
+
+
+        return "index";
+    }
+
+
 /*
     @RequestMapping("/rest/page/item-add")
     public String ItemAdd(){
