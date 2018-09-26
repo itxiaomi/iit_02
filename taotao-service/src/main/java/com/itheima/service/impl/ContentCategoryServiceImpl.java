@@ -148,12 +148,38 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
         //还要去查询它的子级分类
         findAllChild(list , contentCategory.getId());
 
-
         //再去删除  到这里，list集合里面已经完全装好，要删除多少个分类了。
         int result =deleteAll(list);
 
 
+        /*
+            这里还要考虑最后一个问题 , 删除的是BBB， 那么AAA的下面已没有子级分类了，
+            所以它应该变成一个子级的分类，而不是原来的父级分类。
 
+            AAA
+              BBB  ---> 删除的是BBB   parentId  实际上就是AAA的id值。
+                CCC
+                DDD
+
+                删除操作的时候，会传递过来当前操作的节点id 和 父节点的id
+                id  &  parentId ===> contentCategory
+         */
+
+        //这里是按照parentid去查询总数。
+        ContentCategory c = new ContentCategory();
+        c.setParentId(contentCategory.getParentId());
+        int count = mapper.selectCount(c);
+
+        //表示当前操作的这个节点的父亲 下面已经没有子节点了。
+        if(count < 1){
+
+            //由于这里还要执行一次更新的操作，所以还需要再创建一次对象。
+            c = new ContentCategory();
+            c.setId(contentCategory.getParentId());
+            c.setIsParent(false);
+            mapper.updateByPrimaryKeySelective(c);
+
+        }
         return result;
     }
 

@@ -2,9 +2,9 @@
 <div class="easyui-panel" title="Nested Panel" data-options="width:'100%',minHeight:500,noheader:true,border:false" style="padding:10px;">
     <div class="easyui-layout" data-options="fit:true">
         <div data-options="region:'west',split:false" style="width:250px;padding:5px">
-            <ul id="contentCategoryTree" class="easyui-tree" data-options="url:'/rest/content/category',animate: true,method : 'GET'">
-            </ul>
-        </div>
+		<ul id="contentCategoryTree" class="easyui-tree" data-options="url:'/rest/content/category',animate: true,method : 'GET'">
+		</ul>
+	</div>
         <div data-options="region:'center'" style="padding:5px">
             <table class="easyui-datagrid" id="contentList" data-options="toolbar:contentListToolbar,singleSelect:false,collapsible:true,pagination:true,method:'get',pageSize:20,url:'/rest/content',queryParams:{categoryId:0}">
 		    <thead>
@@ -42,11 +42,16 @@ var contentListToolbar = [{
     text:'新增',
     iconCls:'icon-add',
     handler:function(){
+
+        //获取左边选中的条目
     	var node = $("#contentCategoryTree").tree("getSelected");
+
+    	//判定选中那个的条目是否是子级分类
     	if(!node || !$("#contentCategoryTree").tree("isLeaf",node.target)){
     		$.messager.alert('提示','新增内容必须选择一个内容分类!');
     		return ;
     	}
+    	//如果是，那么创建一个窗口， 然后最后提交添加的时候，执行这个地址路径
     	createWindow({
 			url : "/rest/page/content-add"
 		}); 
