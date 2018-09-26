@@ -3,6 +3,8 @@
 	 <ul id="contentCategory" class="easyui-tree">
     </ul>
 </div>
+
+<%--展示出来的菜单--%>
 <div id="contentCategoryMenu" class="easyui-menu" style="width:120px;" data-options="onClick:menuHandler">
     <div data-options="iconCls:'icon-add',name:'add'">添加</div>
     <div data-options="iconCls:'icon-remove',name:'rename'">重命名</div>
@@ -15,14 +17,22 @@ $(function(){
 		url : '/rest/content/category',
 		animate: true,
 		method : "GET",
+
+        //菜单选项， 右键菜单
 		onContextMenu: function(e,node){
+
+		    //阻止默认事件， 屏蔽默认的右键菜单
             e.preventDefault();
             $(this).tree('select',node.target);
+
+            //在我们的鼠标右键的x y的坐标点上，显示菜单 。contentCategoryMenu
             $('#contentCategoryMenu').menu('show',{
                 left: e.pageX,
                 top: e.pageY
             });
         },
+
+        //执行操作完毕
         onAfterEdit : function(node){
         	var _tree = $(this);
         	if(node.id == 0){
@@ -34,10 +44,12 @@ $(function(){
         			});
         		});
         	}else{
+
+        	    //执行一个ajax异步请求。
         		$.ajax({
         			   type: "POST",
         			   url: "/rest/content/category/update",
-        			   data: {id:node.id,name:node.text},
+        			   data: {id:node.id,name:node.text}, //提交上去的数据
         			   success: function(msg){
         				   //$.messager.alert('提示','新增商品成功!');
         			   },
@@ -49,6 +61,8 @@ $(function(){
         }
 	});
 });
+
+//菜单处理器
 function menuHandler(item){
 	var tree = $("#contentCategory");
 	var node = tree.tree("getSelected");
