@@ -3,6 +3,8 @@ package com.itheima.service;
 import com.github.pagehelper.PageInfo;
 import com.itheima.pojo.Content;
 
+import java.util.List;
+
 /*
  *  @项目名：  taotao-parent 
  *  @包名：    com.itheima.service
@@ -20,4 +22,9 @@ public interface ContentService {
 
 
     int edit(Content content);
+
+    int delete(String ids);
+
+
+    List<Content>  selectByCategoryId(long cid);
 }

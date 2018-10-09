@@ -70,4 +70,26 @@ public class ContentController {
         return map;
     }
 
+
+    @RequestMapping("/rest/content/delete")
+    public  Map<String ,Integer> delete(String ids){
+
+        System.out.println("ids=" + ids);
+
+
+        int result =  contentService.delete(ids);
+
+        System.out.println("result=" + result);
+
+        Map<String ,Integer> map = new HashMap<>();
+       if(result > 0 ){
+           map.put("status" , 200);
+       }else{
+           map.put("status",500);
+       }
+
+
+        return map;
+    }
+
 }

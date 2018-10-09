@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *  @创建时间:  2018/9/25 13:48
  *  @描述：    TODO
  */
+//@EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)
 @SpringBootApplication
 public class PortalApp {
 

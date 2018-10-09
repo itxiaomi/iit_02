@@ -59,4 +59,26 @@ public class ContentServiceImpl implements ContentService {
 
        return  contentMapper.updateByPrimaryKeySelective(content);
     }
+
+    @Override
+    public int delete(String ids) {  //1  |  35,71
+
+        String[] idArray = ids.split(",");
+        int result = 0 ;
+        for(String id : idArray){
+
+            result += contentMapper.deleteByPrimaryKey(Long.parseLong(id));
+        }
+        return result;
+    }
+
+    @Override
+    public List<Content> selectByCategoryId(long cid) {
+
+        Content content = new Content();
+        //由于是按照分类id去查询的，所以一定要给这个对象赋值分类id
+        content.setCategoryId(cid);
+
+        return contentMapper.select(content);
+    }
 }
