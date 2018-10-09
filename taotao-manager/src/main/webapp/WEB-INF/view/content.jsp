@@ -38,10 +38,12 @@ $(function(){
 		}
 	});
 });
+
+//内容列表的toolbar
 var contentListToolbar = [{
     text:'新增',
-    iconCls:'icon-add',
-    handler:function(){
+    iconCls:'icon-add', //图标
+    handler:function(){ //点击处理操作
 
         //获取左边选中的条目
     	var node = $("#contentCategoryTree").tree("getSelected");
@@ -51,10 +53,10 @@ var contentListToolbar = [{
     		$.messager.alert('提示','新增内容必须选择一个内容分类!');
     		return ;
     	}
-    	//如果是，那么创建一个窗口， 然后最后提交添加的时候，执行这个地址路径
+    	//如果是，那么创建一个窗口
     	createWindow({
 			url : "/rest/page/content-add"
-		}); 
+		});
     }
 },{
     text:'编辑',
@@ -72,7 +74,10 @@ var contentListToolbar = [{
 		TT.createWindow({
 			url : "/rest/page/content-edit",
 			onLoad : function(){
+
+			    //获取选中的条目
 				var data = $("#contentList").datagrid("getSelections")[0];
+				//拿到选中你条目的数据，填充到form表单里面去。
 				$("#contentEditForm").form("load",data);
 				
 				// 实现图片
@@ -117,8 +122,9 @@ var contentListToolbar = [{
 			height : params.height?params.height:"80%",
 			modal:true,
 			title : params.title?params.title:" ",
-			href : params.url,
+			href : params.url, //连接，表示打开的窗口显示的内容来自于哪里
 			onClose : function(){
+			    console.log("关闭窗口了。")
 				$(this).window("destroy");
 			},
 			onLoad : function(){

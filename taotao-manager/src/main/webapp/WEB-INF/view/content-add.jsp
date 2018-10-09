@@ -83,9 +83,13 @@
 		   url: "/rest/content",
 		   data: $("#contentAddForm").serialize(),
 		   success: function(msg){
-			   $.messager.alert('提示','新增内容成功!');
+
  						$("#contentList").datagrid("reload");
+
+ 						//如果成功，就关闭窗口
  						TT.closeCurrentWindow();
+
+               $.messager.alert('提示','新增内容成功!');
 		   },
 		   error: function(){
 			   $.messager.alert('提示','新增内容失败!');
