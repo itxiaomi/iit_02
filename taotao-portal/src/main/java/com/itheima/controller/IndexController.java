@@ -1,16 +1,10 @@
 package com.itheima.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.itheima.pojo.Content;
 import com.itheima.service.ContentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /*
  *  @项目名：  taotao-parent 
@@ -26,8 +20,13 @@ public class IndexController {
     @Reference
     private ContentService contentService;
 
+
+
+
     @RequestMapping("/")
     public String index(Model model){
+
+        System.out.println("要获取首页的广告数据了~");
 
         //要把大广告位的6张图片给查询出来。
         int categoryId = 89;
@@ -49,13 +48,14 @@ public class IndexController {
             {}
             ]
          */
-         List<Content> contents = contentService.selectByCategoryId(categoryId);
+         String json = contentService.selectByCategoryId(categoryId);
 
-         List<Map<String , Object>> list = new ArrayList<>();
+        System.out.println("json=" + json);
+
+         /*List<Map<String , Object>> list = new ArrayList<>();
 
          //把从数据库查询出来的集合，遍历，一个content就对应一个map集合
          for(Content content :contents){
-
              Map<String , Object> map = new HashMap<>();
              map.put("src" , content.getPic());
              map.put("width",670);
@@ -63,15 +63,20 @@ public class IndexController {
              map.put("href",content.getUrl());
 
              list.add(map);
-         }
+         }*/
 
 
          //把 list ----Gson  | Fastjson ----> json字符串转化
 
-         model.addAttribute("list" , list);
+       // String json = new Gson().toJson(list);
+
+         model.addAttribute("list" , json);
 
 
 
+        //这里的index仅仅起到的是跳转页面
         return "index";
     }
+
+
 }
