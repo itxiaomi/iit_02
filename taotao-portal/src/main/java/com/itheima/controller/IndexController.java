@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.itheima.service.ContentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /*
@@ -21,8 +22,14 @@ public class IndexController {
     private ContentService contentService;
 
 
+    //www.taotao.com/register.jsp
+    @RequestMapping("/page/{pageName}")
+    public String page(@PathVariable  String pageName){
+        return pageName;
+    }
 
 
+    //www.taotao.com
     @RequestMapping("/")
     public String index(Model model){
 
