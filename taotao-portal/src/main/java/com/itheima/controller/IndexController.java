@@ -1,11 +1,18 @@
 package com.itheima.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.google.gson.Gson;
+import com.itheima.pojo.User;
 import com.itheima.service.ContentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 /*
  *  @项目名：  taotao-parent 
@@ -17,6 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class IndexController {
+
+
+    @Autowired
+    private RedisTemplate<String ,String> redisTemplate;
 
     @Reference
     private ContentService contentService;
@@ -31,9 +42,33 @@ public class IndexController {
 
     //www.taotao.com
     @RequestMapping("/")
-    public String index(Model model){
+    public String index(Model model , HttpServletRequest request){
 
         System.out.println("要获取首页的广告数据了~");
+
+
+        //在这里获取ticket， 然后到redis里面去查询用户数据，然后放到页面显示就好了。
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null){
+            // JSESSIONID=8F793A6BB86B68FE714B4DA447A54FFD; tciket=itt02_cc20e370-c1ff-4a82-99d1-692022a15095
+            for (Cookie cookie : cookies) {
+                String name = cookie.getName();
+                System.out.println("name=" + name);
+                if("ticket".equals(name)){
+                    String key = cookie.getValue();
+                    //{"username":zhangsan,"pas"}
+                    String userInfo =redisTemplate.opsForValue().get(key);
+
+                    User user = new Gson().fromJson(userInfo , User.class);
+
+                    model.addAttribute("user",user);
+
+                    break;
+                }
+            }
+        }
+
+
 
         //要把大广告位的6张图片给查询出来。
         int categoryId = 89;

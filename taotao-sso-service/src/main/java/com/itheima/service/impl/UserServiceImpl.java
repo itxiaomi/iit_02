@@ -7,6 +7,7 @@ import com.itheima.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -69,5 +70,20 @@ public class UserServiceImpl implements UserService {
 
         //这里要从redis里面获取用户的信息
         return redisTemplate.opsForValue().get(key);
+    }
+
+    @Override
+    public int addUser(User user) {
+
+        user.setCreated(new Date());
+        user.setUpdated(new Date());
+
+        return userMapper.insert(user);
+
+    }
+
+    @Override
+    public User login(User user) {
+        return null;
     }
 }
