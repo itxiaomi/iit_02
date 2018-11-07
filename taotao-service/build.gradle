@@ -33,6 +33,7 @@ dependencies {
     compile group: 'com.google.code.gson', name: 'gson', version: '2.2.4'
 
 
+
     //添加interface的依赖
     compile project(':taotao-interface')
     compile project(':taotao-mapper')

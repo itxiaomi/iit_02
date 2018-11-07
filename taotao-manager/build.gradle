@@ -39,6 +39,8 @@ dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
 
 
+
+
     //添加interface的依赖
     compile project(':taotao-interface')
     compile project(':taotao-common')
