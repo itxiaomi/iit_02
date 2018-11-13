@@ -26,7 +26,6 @@
 <div class="clr">
 
 
-	表示查询出来的数据。
 
 </div>
 <div class="m clearfix" id="bottom_pager">
@@ -47,30 +46,34 @@
 </div>
 </div>
 <div class="m psearch " id="plist">
-<ul class="list-h clearfix" tpl="2">
-<c:forEach items="${page.list}" var="item">
-<li class="item-book" bookid="11078102">
-	<div class="p-img">
-		<a target="_blank" href="/item/${item.id }.html">
-			<img width="160" height="160" data-img="1" data-lazyload="${item.image}" />
-		</a>
-	</div>
-	<div class="p-name">
-		<a target="_blank" href="/item/${item.id }.html">
-			${item.title}
-		</a>
-	</div>
-	<div class="p-price">
-		<i>淘淘价：</i>
-		<strong>￥<fmt:formatNumber groupingUsed="false" maxFractionDigits="2" minFractionDigits="2" value="${item.price / 100 }"/></strong>
-	</div>
-	<div class="service">由 淘淘 发货</div>
-	<div class="extra">
-		<span class="star"><span class="star-white"><span class="star-yellow h5">&nbsp;</span></span></span>
-	</div>
-</li>
-</c:forEach>
-</ul></div>
+	<ul class="list-h clearfix" tpl="2">
+
+		<%--这里是遍历当前这一页的集合数据。--%>
+		<c:forEach items="${page.list}" var="item">
+			<li class="item-book" bookid="11078102">
+				<div class="p-img">
+					<a target="_blank" href="/item/${item.id }.html">
+						<img width="160" height="160" data-img="1" data-lazyload="${item.image}" />
+					</a>
+				</div>
+				<div class="p-name">
+					<a target="_blank" href="/item/${item.id }.html">
+						${item.title}
+					</a>
+				</div>
+				<div class="p-price">
+					<i>淘淘价：</i>
+					<strong>￥<fmt:formatNumber groupingUsed="false" maxFractionDigits="2" minFractionDigits="2" value="${item.price / 100 }"/></strong>
+				</div>
+				<div class="service">由 淘淘 发货</div>
+				<div class="extra">
+					<span class="star"><span class="star-white"><span class="star-yellow h5">&nbsp;</span></span></span>
+				</div>
+			</li>
+		</c:forEach>
+	</ul>
+
+</div>
 </div>
 <!-- footer start -->
 <jsp:include page="commons/footer.jsp" />
