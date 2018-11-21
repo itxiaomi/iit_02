@@ -23,28 +23,12 @@
 <!-- header end -->
 <div class="w main">
 	<div class="crumb">全部结果&nbsp;&gt;&nbsp;<strong>"${query}"</strong></div>
-<div class="clr">
+	<div class="clr">
 
 
 
-</div>
-<div class="m clearfix" id="bottom_pager">
-<div  id="pagin-btm" class="pagin fr" clstag="search|keycount|search|pre-page2">
-	<a href="?q=${query}&enc=utf-8&qr=&qrst=UNEXPAND&rt=1&page=${page.upper }" class="next">上一页<b></b></a>
-	<c:forEach begin="${page.lpage }" end="${page.rpage }" var="rp">
-		<c:choose>
-			<c:when test="${rp!=page.currentpage }">
-				<a href="?q=${query}&enc=utf-8&qr=&qrst=UNEXPAND&rt=1&page=${rp }">${rp }</a>
-			</c:when>
-			<c:otherwise>
-				<a href="javascript:void(0)" class="current">${rp }</a>
-			</c:otherwise>
-		</c:choose>
-    </c:forEach>
-	<a href="?q=${query}&enc=utf-8&qr=&qrst=UNEXPAND&rt=1&page=${page.next }" class="next">下一页<b></b></a>
-	<span class="page-skip"><em>&nbsp;&nbsp;共${totalPages}页&nbsp;&nbsp;&nbsp;&nbsp;到第</em></span>
-</div>
-</div>
+	</div>
+
 <div class="m psearch " id="plist">
 	<ul class="list-h clearfix" tpl="2">
 
@@ -74,6 +58,25 @@
 	</ul>
 
 </div>
+
+	<div class="m clearfix" id="bottom_pager">
+		<div  id="pagin-btm" class="pagin fr" clstag="search|keycount|search|pre-page2">
+			<a href="?q=${query}&enc=utf-8&qr=&qrst=UNEXPAND&rt=1&page=${page.upper }" class="next">上一页<b></b></a>
+			<c:forEach begin="${page.lpage }" end="${page.rpage }" var="rp">
+				<c:choose>
+					<c:when test="${rp!=page.currentpage }">
+						<a href="?q=${query}&enc=utf-8&qr=&qrst=UNEXPAND&rt=1&page=${rp }">${rp }</a>
+					</c:when>
+					<c:otherwise>
+						<a href="javascript:void(0)" class="current">${rp }</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<a href="?q=${query}&enc=utf-8&qr=&qrst=UNEXPAND&rt=1&page=${page.next }" class="next">下一页<b></b></a>
+			<span class="page-skip"><em>&nbsp;&nbsp;共${totalPages}页&nbsp;&nbsp;&nbsp;&nbsp;到第</em></span>
+		</div>
+	</div>
+
 </div>
 <!-- footer start -->
 <jsp:include page="commons/footer.jsp" />

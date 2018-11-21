@@ -9,6 +9,7 @@ import com.itheima.pojo.Item;
 import com.itheima.pojo.ItemDesc;
 import com.itheima.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsMessagingTemplate;
 
 import java.util.Date;
 import java.util.List;
@@ -30,6 +31,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemDescMapper itemDescMapper;
+
+    @Autowired
+    private JmsMessagingTemplate jms;
 
 
     @Override
@@ -57,6 +61,10 @@ public class ItemServiceImpl implements ItemService {
 
 
         itemDescMapper.insertSelective(itemDesc);
+
+
+        //添加商品完毕之后，要记得发送消息给MQ 。
+        jms.convertAndSend("item-save" , id);
 
         return result;
     }

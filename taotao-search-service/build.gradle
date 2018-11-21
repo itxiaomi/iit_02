@@ -32,5 +32,11 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-solr', version: '1.5.10.RELEASE'
 
 
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-activemq', version: '1.5.10.RELEASE'
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-solr', version: '1.5.10.RELEASE'
+
     compile project(":taotao-search-interface")
+    compile project(":taotao-mapper")
+
 }
