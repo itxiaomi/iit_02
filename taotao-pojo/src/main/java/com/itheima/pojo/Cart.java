@@ -1,5 +1,6 @@
 package com.itheima.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /*
@@ -10,7 +11,7 @@ import java.util.Date;
  *  @创建时间:  2018/11/28 10:47
  *  @描述：    TODO
  */
-public class Cart {
+public class Cart implements Serializable {
 
     private Long id;
     private Long userId;

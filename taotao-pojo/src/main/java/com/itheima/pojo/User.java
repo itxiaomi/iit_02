@@ -27,6 +27,9 @@ import java.util.Date;
 @Entity
 @Table(name = "TB_USER")
 public class User implements java.io.Serializable {
+
+
+
     /** 版本号 */
     private static final long serialVersionUID = 7901146449608621691L;
 
