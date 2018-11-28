@@ -10,6 +10,8 @@ package com.itheima.controller;
  */
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import com.itheima.pojo.Item;
 import com.itheima.service.ItemService;
@@ -18,8 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /*/ restful api 风格
 @DeleteMapping  ： 删除
@@ -30,6 +31,8 @@ import java.util.Map;
 @Controller
 public class ItemController {
 
+    private ObjectMapper mapper = new ObjectMapper();
+
     @Reference
     private ItemService itemService;
 
@@ -37,11 +40,21 @@ public class ItemController {
     //商品的描述，使用desc 来接收，然后要添加到item_desc这张表
     @RequestMapping(value = "/rest/item" , method = RequestMethod.POST)
     @ResponseBody
-    public String addItem(Item item , String desc){
+    public String addItem(Item item , String desc) throws JsonProcessingException {
 
        int result =  itemService.addItem(item , desc);
 
-        System.out.println("result===" + result);
+        List<Item> list = new ArrayList<>();
+        item.setId(123L);
+        list.add(item);
+
+        String s = mapper.writeValueAsString(list);
+
+        String s2 = list.toString();
+
+
+        System.out.println("s===" + s);
+        System.out.println("s2===" + s2);
 
         return "success";
     }

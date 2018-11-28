@@ -1,0 +1,37 @@
+group 'com.itheima'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    //SpringBoot 依赖
+    compile("org.springframework.boot:spring-boot-starter-web:1.5.10.RELEASE")
+
+    //jsp支持
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '8.5.27'
+    compile group: 'org.apache.tomcat', name: 'tomcat-jsp-api', version: '8.5.27'
+
+//jstl ——> 前端页面取值
+    compile group: 'jstl', name: 'jstl', version: '1.2'
+
+    //数据库依赖
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.17'
+
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-activemq', version: '1.5.10.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-freemarker
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-freemarker', version: '1.5.10.RELEASE'
+
+
+    compile project(":taotao-service")
+
+}

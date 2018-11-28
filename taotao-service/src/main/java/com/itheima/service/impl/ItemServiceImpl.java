@@ -82,9 +82,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item getItemById(long id) {
-
         return itemMapper.selectByPrimaryKey(id);
-
     }
 
     @Override

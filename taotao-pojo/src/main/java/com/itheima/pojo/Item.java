@@ -59,7 +59,7 @@ public class Item implements java.io.Serializable {
 
     /** 商品图片 */
     @Column(name = "IMAGE", nullable = true, length = 500)
-    private String image;
+    private String image; //aaaa.jpg,bbb.jpg
 
     /** 所属类目，叶子类目 */
     @Column(name = "CID", nullable = false, length = 19)
@@ -80,7 +80,7 @@ public class Item implements java.io.Serializable {
 
     public String[] getImages(){
         return  image.split(",");
-}
+    }
 
 
     /**

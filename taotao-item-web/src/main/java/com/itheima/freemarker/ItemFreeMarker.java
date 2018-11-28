@@ -56,7 +56,7 @@ public class ItemFreeMarker {
 
 
         //指定生成的html位置
-        Writer out  = new FileWriter("D:\\taotao\\"+message+".html");
+        Writer out  = new FileWriter("D:\\taotao\\item\\"+message+".html");
 
         //指定数据来源
         Map<String , Object> root = new HashMap<>();
